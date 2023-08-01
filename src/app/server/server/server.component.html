@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="my-2">
+    <!--String interpolation-->
+    <h5>String interpolation</h5>
+    <h6>This server is {{ server }} and its {{ status }}</h6>
+  </div>
+  <div class="my-2">
+    <!--Property Binding-->
+    <h5>Property Binding</h5>
+    <button class="btn btn-primary" [disabled]="!allowNewServer">
+      Add Server
+    </button>
+  </div>
+  <div class="my-2">
+    <!--Event Binding-->
+    <h5>Event Binding</h5>
+    <button class="btn btn-primary" (click)="onCreateServer()">
+      Create Server
+    </button>
+    <p>{{ serverCreationStatus }}</p>
+  </div>
+  <div class="my-2">
+    <h5>Passing and using data with event binding</h5>
+    <!--Passing and using data with event binding-->
+    <label>Server Name</label>
+    <input
+      type="text"
+      class="form-control"
+      (input)="onUpdateServerName($event)"
+    />
+    <p>{{ serverName }}</p>
+  </div>
+  <div class="my-2">
+    <h5>Two-way binding</h5>
+    <!--Two-way binding-->
+    <label>Server Name</label>
+    <input type="text" class="form-control" [(ngModel)]="serverNames" />
+    <p>{{ serverNames }}</p>
+  </div>
+  <div class="my-2">
+    <h5>*ngIf and else Directive</h5>
+    <label>Server Name</label>
+    <input
+      type="text"
+      class="form-control"
+      (input)="onUpdateServerName($event)"
+    />
+    <button class="btn btn-primary" (click)="onCreateServer()">
+      Create Server
+    </button>
+    <!-- Directive ngIf -->
+    <p *ngIf="serverCreated; else noServer">
+      Server is created and Name is {{ serverName }}
+    </p>
+    <ng-template #noServer><p>No Server created.</p></ng-template>
+  </div>
+  <div class="my-2">
+    <h5>*ngStyle and ngClass Dynamically style Directive</h5>
+    <h6
+      [ngStyle]="{ color: getColor() }"
+      [ngClass]="{ online: status === 'online' }"
+    >
+      This server is {{ server }} and its {{ status }}
+    </h6>
+  </div>
+  <div class="my-2">
+    <h5>*ngFor Directive</h5>
+    <div *ngFor="let srvr of servers">
+      This server is {{ srvr }} and its {{ status }}
+    </div>
+  </div>
+  <div class="my-2">
+    <h5>How to get index using ngFor</h5>
+    <button class="btn btn-primary" (click)="onToggleDisplay()">
+      Display Details
+    </button>
+    <p *ngIf="showSecret">Secret Password = tuna</p>
+    <div
+      *ngFor="let logItem of log; let i = index"
+      [ngStyle]="{ backgroundColor: i >= 4 ? 'blue' : 'transparent' }"
+      [ngClass]="{ 'white-text': i >= 4 }"
+    >
+      {{ logItem }}
+    </div>
+  </div>
+</div>
