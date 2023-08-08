@@ -1,0 +1,16 @@
+<!-- Display newly added data in cards -->
+<div class="card my-2">
+  <!-- <div class="card-header">{{ element.name }}</div> -->
+  <!-- Demo ngOnChanges -->
+  <div class="card-header" #heading>{{ name }}</div>
+  <div class="card-body">
+    <!-- <p>
+      <strong *ngIf="element.type === 'server'" style="color: red">
+        {{ element.content }}
+      </strong>
+      <em *ngIf="element.type === 'blueprint'">{{ element.content }}</em>
+    </p> -->
+    <!-- Projecting above code from  app-Component -->
+    <ng-content></ng-content>
+  </div>
+</div>

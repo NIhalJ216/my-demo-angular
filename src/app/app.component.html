@@ -1,9 +1,36 @@
-<div>
-  <h1>MY APP</h1>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos ipsam
-    magni neque sunt, perferendis laboriosam incidunt excepturi cumque possimus
-    saepe harum rem. Libero amet deleniti quasi error, cupiditate dolorum eum
-    aliquam ipsum consequatur voluptatibus.
-  </p>
+<div class="container">
+  <!-- Using Emmiters to access in child component  -->
+  <app-cockpit
+    (serverCreated)="onServerAdded($event)"
+    (bpCreated)="onBlueprintAdded($event)"
+  ></app-cockpit>
+  <hr />
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- Demo ngOnChnages -->
+      <button class="btn btn-primary mx-1" (click)="onChangeFirst()">
+        Change First Element
+      </button>
+      <!-- Demo onDestroy -->
+      <button class="btn btn-danger mx-1" (click)="onDestroyFirst()">
+        Destroy First Element
+      </button>
+      <!-- Using prop srvElement from child component -->
+      <app-server-element
+        *ngFor="let serverElement of serverElements"
+        [srvElement]="serverElement"
+        [name]="serverElement.name"
+      >
+        <!-- Using @contentChild -->
+        <p #contentParagraph>
+          <strong *ngIf="serverElement.type === 'server'" style="color: red">
+            {{ serverElement.content }}
+          </strong>
+          <em *ngIf="serverElement.type === 'blueprint'">{{
+            serverElement.content
+          }}</em>
+        </p>
+      </app-server-element>
+    </div>
+  </div>
 </div>
